@@ -5,11 +5,10 @@ import java.util.NoSuchElementException;
 
 public class Letters implements Collection<Character> {
 	private int size = 0;
-
 	private Character[] letters;
 
 	public static void main(String[] args) {
-
+		System.out.println("= PASS =");
 	}
 
 	private class MyIterator implements Iterator<Character> {
@@ -64,11 +63,12 @@ public class Letters implements Collection<Character> {
 	}
 
 	public Letters() {
-		letters = new Character[10];
+		letters = new Character[0];
 	}
 
 	public Letters(String s) {
-		letters = new Character[10];
+		size = s.length();
+		letters = new Character[size];
 		char[] s_array = s.toCharArray();
 		for (Character chr : s_array) {
 			add(chr);
