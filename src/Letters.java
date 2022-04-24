@@ -9,6 +9,8 @@ public class Letters implements Collection<Character> {
 
 	public static void main(String[] args) {
 		System.out.println("= PASS =");
+		String s = "Hellp asd: ";
+		System.out.println(s.length());
 	}
 
 	private class MyIterator implements Iterator<Character> {
@@ -67,8 +69,7 @@ public class Letters implements Collection<Character> {
 	}
 
 	public Letters(String s) {
-		size = s.length();
-		letters = new Character[size];
+		letters = new Character[s.length()];
 		char[] s_array = s.toCharArray();
 		for (Character chr : s_array) {
 			add(chr);

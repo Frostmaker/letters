@@ -11,7 +11,7 @@ public class LettersTest {
 
 	@Test
 	public void size() {
-		Letters letters = new Letters("Acd ;!l '");
+		Letters letters = new Letters("Acd ;!l \'");
 		Assert.assertEquals(9, letters.size());
 	}
 
