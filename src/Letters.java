@@ -7,17 +7,24 @@ public class Letters implements Collection<Character>, Iterable<Character> {
 	private int size = 0;
 	private Character[] letters;
 
+	public static void main(String[] args) {
+		Letters letters = new Letters("Qwertyuiop");
+		Iterator iter = letters.iterator();
+		while (iter.hasNext()) {
+			System.out.println(letters);
+			iter.next();
+			iter.remove();
+		}
+	}
+
 	private class MyIterator implements Iterator<Character> {
 		private int current = -1;
 		private boolean hasPrev = false;
 
-		public static void main(String[] args) {
-			System.out.println("Hello world!");
-		}
 
 		@Override
 		public boolean hasNext() {
-			return current < letters.length && letters[current + 1] != null;
+			return (current + 1) != letters.length && letters[current + 1] != null;
 		}
 
 		@Override
@@ -47,7 +54,8 @@ public class Letters implements Collection<Character>, Iterable<Character> {
 				current--;
 				size--;
 				hasPrev = false;
-				System.arraycopy(result, 0, letters, 0, result.length);
+				letters = result;
+//				System.arraycopy(result, 0, letters, 0, result.length);
 				return;
 			}
 			throw new NoSuchElementException();

@@ -93,16 +93,16 @@ public class LettersTest {
 		Assert.assertEquals("AC", letters.toString());
 	}
 
-//	@Test
-//	public void iteratorRemove4() {
-//		Letters letters = new Letters("Qwertyuiop");
-//		Iterator iter = letters.iterator();
-//		while (iter.hasNext()) {
-//			iter.next();
-//			iter.remove();
-//		}
-//		Assert.assertEquals("", letters.toString());
-//	}
+	@Test
+	public void iteratorRemove4() {
+		Letters letters = new Letters("Qwertyuiop");
+		Iterator iter = letters.iterator();
+		while (iter.hasNext()) {
+			iter.next();
+			iter.remove();
+		}
+		Assert.assertEquals("", letters.toString());
+	}
 
 	@Test(expected = NoSuchElementException.class)
 	public void iteratorRemove5() {
