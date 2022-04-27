@@ -11,6 +11,10 @@ public class Letters implements Collection<Character>, Iterable<Character> {
 		private int current = -1;
 		private boolean hasPrev = false;
 
+		public static void main(String[] args) {
+			System.out.println("Hello world!");
+		}
+
 		@Override
 		public boolean hasNext() {
 			return current < letters.length && letters[current + 1] != null;
