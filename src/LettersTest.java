@@ -114,14 +114,14 @@ public class LettersTest {
 	}
 
 	@Test
-	public void iteratorNext() {
+	public void iteratorNext1() {
 		Letters letters = new Letters("Hello world!");
 		Iterator iter = letters.iterator();
 		Assert.assertEquals('H', iter.next());
 	}
 
 	@Test(expected = NoSuchElementException.class)
-	public void iteratorNext1() {
+	public void iteratorNext2() {
 		Letters letters = new Letters("H");
 		Iterator iter = letters.iterator();
 		iter.next();
@@ -129,7 +129,7 @@ public class LettersTest {
 	}
 
 	@Test(expected = NoSuchElementException.class)
-	public void iteratorNext2() {
+	public void iteratorNext3() {
 		Letters letters = new Letters("Hello world");
 		Iterator iter = letters.iterator();
 		while (iter.hasNext()) {
@@ -138,56 +138,57 @@ public class LettersTest {
 		iter.next();
 	}
 
+
 	@Test(expected = NoSuchElementException.class)
-	public void iteratorNext3() {
+	public void iteratorNext4() {
 		Letters letters = new Letters("");
 		Iterator iter = letters.iterator();
 		iter.next();
 	}
 
 	@Test
-	public void add() {
+	public void add1() {
 		Letters letters = new Letters("Hello world!");
 		letters.add('a');
 		Assert.assertEquals("Hello world!a", letters.toString());
 	}
 
-	@Test
-	public void add1() {
-		Letters letters = new Letters("llo world!");
-		letters.add('a');
-		Assert.assertEquals("llo world!a", letters.toString());
-	}
 
 	@Test
 	public void add2() {
-		Letters letters = new Letters(" world!");
+		Letters letters = new Letters("");
 		letters.add('a');
-		Assert.assertEquals(" world!a", letters.toString());
+		Assert.assertEquals("a", letters.toString());
 	}
 
 	@Test
-	public void remove() {
+	public void remove1() {
 		Letters letters = new Letters("Hello world!");
 		Assert.assertFalse(letters.remove('a'));
 	}
 
 	@Test
-	public void remove1() {
+	public void remove2() {
 		Letters letters = new Letters("Hello world!");
 		Assert.assertTrue(letters.remove('d'));
 		Assert.assertEquals("Hello worl!", letters.toString());
 	}
 
 	@Test
-	public void remove2() {
+	public void remove3() {
 		Letters letters = new Letters("llo world!");
 		Assert.assertTrue(letters.remove('!'));
 		Assert.assertEquals("llo world", letters.toString());
 	}
 
 	@Test
-	public void containsAll() {
+	public void remove4() {
+		Letters letters = new Letters("");
+		Assert.assertFalse(letters.remove('!'));
+	}
+
+	@Test
+	public void containsAll1() {
 		Letters letters = new Letters("Hello world!");
 		Letters letters1 = new Letters("lo world!");
 		Assert.assertTrue(letters.containsAll(letters1));
@@ -195,7 +196,7 @@ public class LettersTest {
 	}
 
 	@Test
-	public void containsAll1() {
+	public void containsAll2() {
 		Letters letters = new Letters("Hello world!");
 		Letters letters1 = new Letters("lo world!");
 		Assert.assertFalse(letters1.containsAll(letters));
@@ -203,15 +204,24 @@ public class LettersTest {
 	}
 
 	@Test
-	public void addAll() {
+	public void addAll1() {
 		Letters letters = new Letters("Hello ");
 		Letters letters1 = new Letters("world!");
 		letters.addAll(letters1);
 		Assert.assertEquals("Hello world!", letters.toString());
 	}
 
+
 	@Test
-	public void removeAll() {
+	public void addAll2() {
+		Letters letters = new Letters("");
+		Letters letters1 = new Letters("Qwerty");
+		letters.addAll(letters1);
+		Assert.assertEquals("Qwerty", letters.toString());
+	}
+
+	@Test
+	public void removeAll1() {
 		Letters letters = new Letters("Hello ");
 		Letters letters1 = new Letters("world!");
 		Assert.assertTrue(letters.removeAll(letters1));
@@ -219,21 +229,13 @@ public class LettersTest {
 	}
 
 	@Test
-	public void removeAll1() {
+	public void removeAll2() {
 		Letters letters = new Letters("Hello ");
 		Letters letters1 = new Letters("wqrd!");
 		Assert.assertTrue(letters.removeAll(letters1));
 		Assert.assertEquals("Hello ", letters.toString());
 	}
 
-
-	@Test
-	public void clear() {
-		Letters letters = new Letters("");
-		letters.clear();
-		Assert.assertEquals("", letters.toString());
-		Assert.assertEquals(0, letters.size());
-	}
 
 	@Test
 	public void clear1() {
@@ -244,41 +246,49 @@ public class LettersTest {
 	}
 
 	@Test
-	public void testToString() {
+	public void clear2() {
+		Letters letters = new Letters("ABCDEF");
+		letters.clear();
+		Assert.assertEquals("", letters.toString());
+		Assert.assertEquals(0, letters.size());
+	}
+
+	@Test
+	public void testToString1() {
 		Letters letters = new Letters("Hello world!");
 		Assert.assertEquals("Hello world!", letters.toString());
 	}
 
 	@Test
-	public void testEquals() {
+	public void testEquals1() {
 		Letters letters = new Letters("Hello world!");
 		Letters letters1 = new Letters("Hello world!");
 		Assert.assertTrue(letters.equals(letters1));
 	}
 
 	@Test
-	public void testEquals1() {
+	public void testEquals2() {
 		Letters letters = new Letters("Hello world!");
 		Letters letters1 = letters;
 		Assert.assertTrue(letters.equals(letters1));
 	}
 
 	@Test
-	public void testEquals2() {
+	public void testEquals3() {
 		Letters letters = new Letters("Hello world!");
 		Letters letters1 = null;
 		Assert.assertFalse(letters.equals(letters1));
 	}
 
 	@Test
-	public void testEquals3() {
+	public void testEquals4() {
 		Letters letters = new Letters("Hello world!");
 		Letters letters1 = new Letters("Hello wrld!");
 		Assert.assertFalse(letters.equals(letters1));
 	}
 
 	@Test
-	public void retainAll() {
+	public void retainAll1() {
 		Letters letters = new Letters("Hello ");
 		Letters letters1 = new Letters("wqrd!");
 		Assert.assertTrue(letters.retainAll(letters1));
@@ -286,10 +296,18 @@ public class LettersTest {
 	}
 
 	@Test
-	public void retainAll1() {
+	public void retainAll2() {
 		Letters letters = new Letters("Hewwl!lo ");
 		Letters letters1 = new Letters("wqrd!");
 		Assert.assertTrue(letters.retainAll(letters1));
 		Assert.assertEquals("ww!", letters.toString());
+	}
+
+	@Test
+	public void retainAll3() {
+		Letters letters = new Letters("wqrd!");
+		Letters letters1 = new Letters("Hewwl!lo ");
+		Assert.assertTrue(letters.retainAll(letters1));
+		Assert.assertEquals("w!", letters.toString());
 	}
 }
