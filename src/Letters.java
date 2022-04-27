@@ -1,17 +1,11 @@
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Letters implements Collection<Character> {
+
+public class Letters implements Collection<Character>, Iterable<Character> {
 	private int size = 0;
 	private Character[] letters;
-
-	public static void main(String[] args) {
-		System.out.println("= PASS =");
-		String s = "Hellp asd: ";
-		System.out.println(s.length());
-	}
 
 	private class MyIterator implements Iterator<Character> {
 		private int current = -1;
@@ -65,11 +59,11 @@ public class Letters implements Collection<Character> {
 	}
 
 	public Letters() {
-		letters = new Character[0];
+		letters = new Character[10];
 	}
 
 	public Letters(String s) {
-		letters = new Character[s.length()];
+		letters = new Character[10];
 		char[] s_array = s.toCharArray();
 		for (Character chr : s_array) {
 			add(chr);
@@ -77,8 +71,10 @@ public class Letters implements Collection<Character> {
 	}
 
 	private void resize(int newLength) {
-		Character[] chars;
-		chars = Arrays.copyOf(letters, newLength);
+		Character[] chars = new Character[newLength];
+		for (int i = 0; i < letters.length; i++) {
+			chars[i] = letters[i];
+		}
 		letters = chars;
 	}
 
@@ -224,10 +220,18 @@ public class Letters implements Collection<Character> {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null || getClass() != obj.getClass())
+		if (obj == null || this.getClass() != obj.getClass())
 			return false;
 		Letters ch = (Letters) obj;
-		return size == ch.size && Arrays.equals(letters, ch.letters);
+		if (size != ch.size)
+			return false;
+		else {
+			for (int i = 0; i < size; i++) {
+				if (ch.letters[i] != this.letters[i])
+					return false;
+			}
+			return true;
+		}
 	}
 
 	public int getSize() {

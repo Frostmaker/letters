@@ -4,69 +4,76 @@ import java.util.*;
 
 public class LettersTest {
 	@Test
-	public void size0() {
+	public void size1() {
 		Letters letters = new Letters("");
 		Assert.assertEquals(0, letters.size());
-	}
-
-	@Test
-	public void size() {
-		Letters letters = new Letters("Acd ;!l \'");
-		Assert.assertEquals(9, letters.size());
-	}
-
-	@Test
-	public void size1() {
-		Letters letters = new Letters("Acd ; !l '");
-		Assert.assertEquals(10, letters.size());
 	}
 
 	@Test
 	public void size2() {
-		Letters letters = new Letters("Acd ;!l   '");
-		Assert.assertEquals(11, letters.size());
+		Letters letters = new Letters("Qwerty");
+		Assert.assertEquals(6, letters.size());
 	}
 
 	@Test
 	public void size3() {
-		Letters letters = new Letters("");
-		Assert.assertEquals(0, letters.size());
+		Letters letters = new Letters("Qwertyuiop");
+		Assert.assertEquals(10, letters.size());
 	}
 
 	@Test
-	public void isEmpty() {
-		Letters letters = new Letters();
-		Assert.assertEquals(true, letters.isEmpty());
+	public void size4() {
+		Letters letters = new Letters("Qwertyuiopasd");
+		Assert.assertEquals(13, letters.size());
 	}
+
 
 	@Test
 	public void isEmpty1() {
-		Letters letters = new Letters("");
-		Assert.assertEquals(true, letters.isEmpty());
+		Letters letters = new Letters();
+		Assert.assertTrue(letters.isEmpty());
 	}
 
 	@Test
-	public void contains() {
-		Letters letters = new Letters("Hello world!");
-		Assert.assertEquals(false, letters.contains('c'));
-
+	public void isEmpty2() {
+		Letters letters = new Letters("Qwerty");
+		Assert.assertFalse(letters.isEmpty());
 	}
 
 	@Test
 	public void contains1() {
 		Letters letters = new Letters("Hello world!");
-		Assert.assertEquals(true, letters.contains('!'));
+		Assert.assertFalse(letters.contains('c'));
+
+	}
+
+	@Test
+	public void contains2() {
+		Letters letters = new Letters("Hello world!");
+		Assert.assertTrue(letters.contains('!'));
+	}
+
+	@Test
+	public void contains3() {
+		Letters letters = new Letters("Hello world!");
+		Assert.assertTrue(letters.contains('H'));
+	}
+
+	@Test
+	public void contains4() {
+		Letters letters = new Letters("Hello world!");
+		Assert.assertTrue(letters.contains(' '));
 	}
 
 	@Test(expected = NoSuchElementException.class)
-	public void iteratorRemove() {
+	public void iteratorRemove1() {
 		Letters letters = new Letters("");
 		Iterator iter = letters.iterator();
 		iter.remove();
 	}
 
 	@Test
-	public void iteratorRemove1() {
+	public void iteratorRemove2() {
 		Letters letters = new Letters("Hello world");
 		Iterator iter = letters.iterator();
 		iter.next();
@@ -74,45 +81,34 @@ public class LettersTest {
 		iter.next();
 		iter.remove();
 		Assert.assertEquals("llo world", letters.toString());
-	}
-
-	@Test
-	public void iteratorRemove2() {
-		Letters letters = new Letters("123");
-		Iterator iter = letters.iterator();
-		iter.next();
-		iter.next();
-		iter.remove();
-		Assert.assertEquals("13", letters.toString());
 	}
 
 	@Test
 	public void iteratorRemove3() {
-		Letters letters = new Letters("Hello world");
+		Letters letters = new Letters("ABC");
 		Iterator iter = letters.iterator();
-		while (iter.hasNext()) {
-			iter.next();
-		}
-		while (!letters.isEmpty())
-			iter.remove();
-		Assert.assertEquals("", letters.toString());
+		iter.next();
+		iter.next();
+		iter.remove();
+		Assert.assertEquals("AC", letters.toString());
 	}
 
-	@Test
-	public void iteratorRemove4() {
-		Letters letters = new Letters("Hello world");
-		Iterator iter = letters.iterator();
-		iter.next();
-		iter.remove();
-		iter.next();
-		iter.remove();
-		Assert.assertEquals("llo world", letters.toString());
-	}
+//	@Test
+//	public void iteratorRemove4() {
+//		Letters letters = new Letters("Qwertyuiop");
+//		Iterator iter = letters.iterator();
+//		while (iter.hasNext()) {
+//			iter.next();
+//			iter.remove();
+//		}
+//		Assert.assertEquals("", letters.toString());
+//	}
 
 	@Test(expected = NoSuchElementException.class)
 	public void iteratorRemove5() {
 		Letters letters = new Letters("h");
 		Iterator iter = letters.iterator();
+		iter.next();
 		iter.remove();
 		iter.remove();
 	}
@@ -173,20 +169,20 @@ public class LettersTest {
 	@Test
 	public void remove() {
 		Letters letters = new Letters("Hello world!");
-		Assert.assertEquals(false, letters.remove('a'));
+		Assert.assertFalse(letters.remove('a'));
 	}
 
 	@Test
 	public void remove1() {
 		Letters letters = new Letters("Hello world!");
-		Assert.assertEquals(true, letters.remove('d'));
+		Assert.assertTrue(letters.remove('d'));
 		Assert.assertEquals("Hello worl!", letters.toString());
 	}
 
 	@Test
 	public void remove2() {
 		Letters letters = new Letters("llo world!");
-		Assert.assertEquals(true, letters.remove('!'));
+		Assert.assertTrue(letters.remove('!'));
 		Assert.assertEquals("llo world", letters.toString());
 	}
 
@@ -194,7 +190,7 @@ public class LettersTest {
 	public void containsAll() {
 		Letters letters = new Letters("Hello world!");
 		Letters letters1 = new Letters("lo world!");
-		Assert.assertEquals(true, letters.containsAll(letters1));
+		Assert.assertTrue(letters.containsAll(letters1));
 
 	}
 
@@ -202,7 +198,7 @@ public class LettersTest {
 	public void containsAll1() {
 		Letters letters = new Letters("Hello world!");
 		Letters letters1 = new Letters("lo world!");
-		Assert.assertEquals(false, letters1.containsAll(letters));
+		Assert.assertFalse(letters1.containsAll(letters));
 
 	}
 
@@ -218,7 +214,7 @@ public class LettersTest {
 	public void removeAll() {
 		Letters letters = new Letters("Hello ");
 		Letters letters1 = new Letters("world!");
-		Assert.assertEquals(true, letters.removeAll(letters1));
+		Assert.assertTrue(letters.removeAll(letters1));
 		Assert.assertEquals("He ", letters.toString());
 	}
 
@@ -226,29 +222,14 @@ public class LettersTest {
 	public void removeAll1() {
 		Letters letters = new Letters("Hello ");
 		Letters letters1 = new Letters("wqrd!");
-		Assert.assertEquals(true, letters.removeAll(letters1));
+		Assert.assertTrue(letters.removeAll(letters1));
 		Assert.assertEquals("Hello ", letters.toString());
 	}
 
-	@Test
-	public void retainAll() {
-		Letters letters = new Letters("Hello ");
-		Letters letters1 = new Letters("wqrd!");
-		Assert.assertEquals(true, letters.retainAll(letters1));
-		Assert.assertEquals("", letters.toString());
-	}
-
-	@Test
-	public void retainAll1() {
-		Letters letters = new Letters("Hewwl!lo ");
-		Letters letters1 = new Letters("wqrd!");
-		Assert.assertEquals(true, letters.retainAll(letters1));
-		Assert.assertEquals("ww!", letters.toString());
-	}
 
 	@Test
 	public void clear() {
-		Letters letters = new Letters("Hello world!");
+		Letters letters = new Letters("");
 		letters.clear();
 		Assert.assertEquals("", letters.toString());
 		Assert.assertEquals(0, letters.size());
@@ -272,27 +253,43 @@ public class LettersTest {
 	public void testEquals() {
 		Letters letters = new Letters("Hello world!");
 		Letters letters1 = new Letters("Hello world!");
-		Assert.assertEquals(true, letters.equals(letters1));
+		Assert.assertTrue(letters.equals(letters1));
 	}
 
 	@Test
 	public void testEquals1() {
 		Letters letters = new Letters("Hello world!");
 		Letters letters1 = letters;
-		Assert.assertEquals(true, letters.equals(letters1));
+		Assert.assertTrue(letters.equals(letters1));
 	}
 
 	@Test
 	public void testEquals2() {
 		Letters letters = new Letters("Hello world!");
 		Letters letters1 = null;
-		Assert.assertEquals(false, letters.equals(letters1));
+		Assert.assertFalse(letters.equals(letters1));
 	}
 
 	@Test
 	public void testEquals3() {
 		Letters letters = new Letters("Hello world!");
 		Letters letters1 = new Letters("Hello wrld!");
-		Assert.assertEquals(false, letters.equals(letters1));
+		Assert.assertFalse(letters.equals(letters1));
+	}
+
+	@Test
+	public void retainAll() {
+		Letters letters = new Letters("Hello ");
+		Letters letters1 = new Letters("wqrd!");
+		Assert.assertTrue(letters.retainAll(letters1));
+		Assert.assertEquals("", letters.toString());
+	}
+
+	@Test
+	public void retainAll1() {
+		Letters letters = new Letters("Hewwl!lo ");
+		Letters letters1 = new Letters("wqrd!");
+		Assert.assertTrue(letters.retainAll(letters1));
+		Assert.assertEquals("ww!", letters.toString());
 	}
 }
