@@ -39,6 +39,8 @@ public class Letters implements Collection<Character>, Iterable<Character> {
 
 		@Override
 		public void remove() throws NoSuchElementException {
+			if (letters.length == 0)
+				throw new NoSuchElementException();
 			Character[] result = new Character[letters.length - 1];
 			if (current != -1) {
 				if (!hasPrev)
@@ -71,11 +73,11 @@ public class Letters implements Collection<Character>, Iterable<Character> {
 	}
 
 	public Letters() {
-		letters = new Character[10];
+		letters = new Character[1];
 	}
 
 	public Letters(String s) {
-		letters = new Character[10];
+		letters = new Character[1];
 		char[] s_array = s.toCharArray();
 		for (Character chr : s_array) {
 			add(chr);
